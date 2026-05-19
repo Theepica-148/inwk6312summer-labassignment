@@ -1,0 +1,60 @@
+from netmiko import ConnectHandler
+
+# Router 1
+r1 = {
+    "device_type": "cisco_ios",
+    "ip": "192.168.1.101",
+    "username": "student",
+    "password": "Meilab123",
+    "port": 22
+}
+
+# Router 2
+r2 = {
+    "device_type": "cisco_ios",
+    "ip": "192.168.1.102",
+    "username": "student",
+    "password": "Meilab123",
+    "port": 22
+}
+
+# Router 3
+r3 = {
+    "device_type": "cisco_ios",
+    "ip": "192.168.1.103",
+    "username": "student",
+    "password": "Meilab123",
+    "port": 22
+}
+
+# Router 4
+r4 = {
+    "device_type": "cisco_ios",
+    "ip": "192.168.1.104",
+    "username": "student",
+    "password": "Meilab123",
+    "port": 22
+}
+
+# Loop through routers
+for device in (r1, r2, r3, r4):
+
+    # Connect to device
+    net_connect = ConnectHandler(**device)
+
+    # Execute command
+    
+output = net_connect.send_command("show interface description")output = net_connect.send_command("show ip interface brief")
+    output = net_connect.send_command("show ip route")
+    
+    # Disconnect
+    net_connect.disconnect()
+
+    # Print output
+    print("-" * 100)
+    print(f"Interface Description for {device['ip']}")
+    print("-" * 100)
+
+    print(output)
+
+    print("-" * 100)
